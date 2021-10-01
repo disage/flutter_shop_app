@@ -90,6 +90,7 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
             decoration: InputDecoration(
               hintText: "Enter your email",
               labelText: "Email",
+              floatingLabelBehavior: FloatingLabelBehavior.always,
               suffixIcon: CustomSuffixIcon(svgIcon: "assets/icons/Mail.svg"),
             ),
           ),
