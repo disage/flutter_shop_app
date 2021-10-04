@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_shop_app/components/custom_suffix_icon.dart';
 import 'package:flutter_shop_app/components/default_button.dart';
 import 'package:flutter_shop_app/components/form_error.dart';
+import 'package:flutter_shop_app/screens/complete_profile/complete_profile_screen.dart';
 
 import '../../../constants.dart';
 import '../../../size_config.dart';
@@ -15,7 +16,7 @@ class _SignUpFormState extends State<SignUpForm> {
   final _formKey = GlobalKey<FormState>();
   late String email;
   late String password;
-  late String conform_password;
+  late String conformPassword;
   final List<String> errors = [];
   void addError({required String error}) {
     if (!errors.contains(error))
@@ -48,6 +49,7 @@ class _SignUpFormState extends State<SignUpForm> {
               text: "Continue",
               press: () {
                 if (_formKey.currentState!.validate()) {
+                  Navigator.pushNamed(context, CompleteProfileScreen.routeName);
                   //Go to complete profile page
                 }
               })
@@ -59,9 +61,9 @@ class _SignUpFormState extends State<SignUpForm> {
   TextFormField buildConfPasswrodFormField() {
     return TextFormField(
       obscureText: true,
-      onSaved: (newValue) => conform_password = newValue!,
+      onSaved: (newValue) => conformPassword = newValue!,
       onChanged: (value) {
-        if (password == conform_password) {
+        if (password == conformPassword) {
           removeError(error: kMatchPassError);
         }
         return null;
@@ -69,7 +71,7 @@ class _SignUpFormState extends State<SignUpForm> {
       validator: (value) {
         if (value!.isEmpty) {
           return "";
-        } else if (password != conform_password) {
+        } else if (password != value) {
           addError(error: kMatchPassError);
           return "";
         }
